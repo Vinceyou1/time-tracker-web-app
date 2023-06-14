@@ -1,0 +1,25 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-timetrackerwebapp-dev-161146-authRole",
+      "UnauthRoleArn": "arn:aws:iam::817868055029:role/amplify-timetrackerwebapp-dev-161146-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::817868055029:role/amplify-timetrackerwebapp-dev-161146-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-timetrackerwebapp-dev-161146-deployment",
+      "UnauthRoleName": "amplify-timetrackerwebapp-dev-161146-unauthRole",
+      "StackName": "amplify-timetrackerwebapp-dev-161146",
+      "StackId": "arn:aws:cloudformation:us-east-2:817868055029:stack/amplify-timetrackerwebapp-dev-161146/e7d58e90-0a2e-11ee-b78e-06f9e167ab1d",
+      "AmplifyAppId": "dspeaararmm0u"
+    },
+    "categories": {
+      "auth": {
+        "timetrackerwebappd81038ef": {
+          "userPoolId": "us-east-2_JnykyAjF0",
+          "userPoolName": "time-tracker-web-app",
+          "webClientId": "3j6k22tm9ql3b2jr497qs5250e",
+          "nativeClientId": "3j6k22tm9ql3b2jr497qs5250e"
+        }
+      }
+    }
+  }
+}
