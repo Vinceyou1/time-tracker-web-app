@@ -12,7 +12,8 @@ import Header from './Header';
 import NotFound from './NotFound';
 
 function user(){
-  return username;
+  const lastAuthUserKey = 'CognitoIdentityServiceProvider.3j6k22tm9ql3b2jr497qs5250e.LastAuthUser';
+  return localStorage.getItem(lastAuthUserKey);
 }
 
 const router = createBrowserRouter([

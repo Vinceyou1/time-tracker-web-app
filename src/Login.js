@@ -6,8 +6,7 @@ import {withAuthenticator} from '@aws-amplify/ui-react'
 
 Amplify.configure(awsconfig);
 
-function Login({user}){
-    localStorage.setItem("username", user.username)
+function Login(){
     window.location.replace("/");
 }
 
