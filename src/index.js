@@ -8,37 +8,40 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import {Hub} from 'aws-amplify';
 import Header from './Header'
+import {Hub} from 'aws-amplify'
 
-let username = null;
-Hub.listen('user', (data) => {
-  username = data.payload.username;
-  console.log('User ' + username + ' has signed in ');
-})
+let username = localStorage.getItem("username");
 
 function user(){
-  return localStorage.getItem('user');
+  return username;
 }
+Hub.listen('reload', () => {window.location.reload();})
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    loader: user,
-  },
-  {
-    path: "login",
-    element: <Login />
-  }
+{ 
+  element: <Header />,
+  loader: user, 
+  children:[
+    {
+      path: "/",
+      element: <App />,
+      loader: user,
+    },
+    {
+      path: "/login",
+      element: <Login />
+    }
+  ]
+}
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Header />
     <RouterProvider router={router} />
   </React.StrictMode>
 );
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

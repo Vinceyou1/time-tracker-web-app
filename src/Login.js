@@ -7,10 +7,7 @@ import {withAuthenticator} from '@aws-amplify/ui-react'
 Amplify.configure(awsconfig);
 
 function Login({user}){
-    localStorage.setItem('user', JSON.stringify(user.username));
-    Hub.dispatch('user', {
-        'username': user.username
-    });
+    localStorage.setItem("username", user.username)
     window.location.replace("/");
 }
 
