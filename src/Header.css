@@ -5,24 +5,21 @@
     border-width: 0 0 4px 0;
     border-style: solid;
 }
-ul {
-    height: 8vh;
+li {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     display: inline-block;  
+    text-decoration: none;
+    text-align: center;
 }
-  
-li {
+
+.nav-link{
     font-size: 1em;
     float: left;
     color: black; 
-    margin-right: 2vw;
-    display: block;
-    text-align: center;
-    padding: 2.2vh 0 0 2vw;
-    text-decoration: none;
+    margin: 2vh 3vw 0 2vw;
 }
   
 li a:hover {
@@ -43,6 +40,6 @@ li a:hover {
     text-decoration: none;
 }
 
-.Login hover{
+.Header Link:hover{
     background-color: lightskyblue;
 }

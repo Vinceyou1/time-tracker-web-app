@@ -8,32 +8,33 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Header from './Header'
-import {Hub} from 'aws-amplify'
-
-let username = localStorage.getItem("username");
+import Header from './Header';
+import NotFound from './NotFound';
 
 function user(){
   return username;
 }
-Hub.listen('reload', () => {window.location.reload();})
 
 const router = createBrowserRouter([
-{ 
-  element: <Header />,
-  loader: user, 
-  children:[
-    {
-      path: "/",
-      element: <App />,
-      loader: user,
-    },
-    {
-      path: "/login",
-      element: <Login />
-    }
-  ]
-}
+  { 
+    element: <Header />,
+    loader: user, 
+    children:[
+      {
+        path: "/",
+        element: <App />,
+      },
+      {
+        path: "/login",
+        element: <Login />
+      },
+      {
+        element: <NotFound />,
+        path: "*"
+      }
+    ]
+  },
+  
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -46,4 +47,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+reportWebVitals(console.log);

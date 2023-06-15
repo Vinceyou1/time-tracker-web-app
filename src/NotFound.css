@@ -1,0 +1,14 @@
+#error_page{
+    height: fit-content;
+}
+#error_number{
+    text-align: center;
+    font-size: 12em;
+    margin-bottom: 0px;
+}
+#error_message{
+    margin-top: 0px;
+    display: block;
+    text-align: center;
+    font-size: 2em;
+}
