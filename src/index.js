@@ -1,29 +1,41 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import {App, Login} from './App';
+import App from './App';
+import Login from './Login'
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
-  createRoutesFromElements,
-  Route,
   RouterProvider,
 } from "react-router-dom";
+import {Hub} from 'aws-amplify';
+import Header from './Header'
+
+let username = null;
+Hub.listen('user', (data) => {
+  username = data.payload.username;
+  console.log('User ' + username + ' has signed in ');
+})
+
+function user(){
+  return localStorage.getItem('user');
+}
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    
+    loader: user,
   },
   {
-    path: "/login",
+    path: "login",
     element: <Login />
   }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <Header />
     <RouterProvider router={router} />
   </React.StrictMode>
 );
