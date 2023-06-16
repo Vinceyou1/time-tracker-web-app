@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './Home.css';
 import '@aws-amplify/ui/dist/styles.css';
 
 function App() {
