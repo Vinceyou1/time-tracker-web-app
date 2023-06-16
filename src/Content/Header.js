@@ -16,15 +16,13 @@ function Header(){
         return(
             <>
                 <div className='Header'>
-                    <NavLink to="/" className={isActive =>
-                        "nav-link" + (!isActive ? "-unselected" : "")
-                    }>
+                    <NavLink to="/" className={({isActive}) => "nav-link" + (!isActive ? " unselected" : " selected")}>
                         <li>Home</li>
                     </NavLink>
-                    <NavLink to="/showcase" className="nav-link">
+                    <NavLink to="/showcase" className={({isActive}) => "nav-link" + (!isActive ? " unselected" : " selected")}>
                         <li>About</li>
                     </NavLink>
-                    <Link onClick={signout}className='Login' >Log Out</Link>
+                    <div className='login-div'><Link onClick={signout} className='Login' >Log Out</Link></div>
                 </div>
                 <Outlet />
             </>
@@ -34,17 +32,13 @@ function Header(){
         return(
             <>
                 <div className='Header'>
-                    <NavLink to="" className={isActive =>
-                        "nav-link" + (!isActive ? " unselected" : "")
-                    }>
+                    <NavLink to="" className={({isActive}) => "nav-link" + (!isActive ? " unselected" : " selected")}>
                         <li>Home</li>
                     </NavLink>
-                    <NavLink to="/showcase" className={isActive =>
-                        "nav-link" + (!isActive ? " unselected" : "")
-                    }>
+                    <NavLink to="/showcase" className={({isActive}) => "nav-link" + (!isActive ? " unselected" : " selected")}>
                         <li>About</li>
                     </NavLink>
-                    <Link to='/login' className='Login'>Log in/Register</Link>
+                    <div className='login-div'><Link onClick={signout} className='Login' >Log in/Register</Link></div>
                 </div>
                 <Outlet />
             </>

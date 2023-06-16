@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import Login from './Login'
+import App from './Content/App';
+import Login from './Content/Login'
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Header from './Header';
-import NotFound from './NotFound';
+import Header from './Content/Header';
+import NotFound from './Content/NotFound';
 
 function user(){
   const lastAuthUserKey = 'CognitoIdentityServiceProvider.3j6k22tm9ql3b2jr497qs5250e.LastAuthUser';
