@@ -20,7 +20,13 @@ function Header(){
                         <li>Home</li>
                     </NavLink>
                     <NavLink to="/showcase" className={({isActive}) => "nav-link" + (!isActive ? " unselected" : " selected")}>
-                        <li>About</li>
+                        <li>Showcase</li>
+                    </NavLink>
+                    <NavLink to="/track" className={({isActive}) => "nav-link" + (!isActive ? " unselected" : " selected")}>
+                        <li>Tracking</li>
+                    </NavLink>
+                    <NavLink to="/log" className={({isActive}) => "nav-link" + (!isActive ? " unselected" : " selected")}>
+                        <li>Log</li>
                     </NavLink>
                     <div className='login-div'><Link onClick={signout} className='Login' >Log Out</Link></div>
                 </div>
@@ -36,7 +42,7 @@ function Header(){
                         <li>Home</li>
                     </NavLink>
                     <NavLink to="/showcase" className={({isActive}) => "nav-link" + (!isActive ? " unselected" : " selected")}>
-                        <li>About</li>
+                        <li>Showcase</li>
                     </NavLink>
                     <div className='login-div'><Link to='/login' className='Login' >Log in/Register</Link></div>
                 </div>
