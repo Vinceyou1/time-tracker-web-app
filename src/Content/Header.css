@@ -2,7 +2,7 @@
     box-sizing: content-box;
     height: 8.5vh;
     background-color: white;
-    border-color: aquamarine;
+    border-color: lightslategray;
     border-width: 0 0 4px 0;
     border-style: solid;
 }
@@ -41,7 +41,7 @@ li{
     margin-right: 1vw;
 }
 
-.Login{
+.Logout{
     margin-top: 1.25vh;
     height: 6vh;
     margin-right: 0.5vw;
@@ -51,6 +51,7 @@ li{
     text-decoration: none;
 }
 
+
 .login-div :hover {
-    background-color: lightskyblue;
+    background-color: #66aaff88;
 }

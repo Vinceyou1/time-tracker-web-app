@@ -28,7 +28,7 @@ function Header(){
                     <NavLink to="/log" className={({isActive}) => "nav-link" + (!isActive ? " unselected" : " selected")}>
                         <li>Log</li>
                     </NavLink>
-                    <div className='login-div'><Link onClick={signout} className='Login' >Log Out</Link></div>
+                        <Link onClick={signout} className='Logout' >Log Out</Link>
                 </div>
                 <Outlet />
             </>
@@ -44,7 +44,7 @@ function Header(){
                     <NavLink to="/showcase" className={({isActive}) => "nav-link" + (!isActive ? " unselected" : " selected")}>
                         <li>Showcase</li>
                     </NavLink>
-                    <div className='login-div'><Link to='/login' className='Login' >Log in/Register</Link></div>
+                    <div className='login-div'><Link to='/login' className='Logout in' >Log in/Register</Link></div>
                 </div>
                 <Outlet />
             </>
