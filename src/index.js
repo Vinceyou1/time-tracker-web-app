@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import Header from './Content/Header';
 import NotFound from './Content/NotFound';
+import Tracking from './Content/Tracking';
 
 function user(){
   const lastAuthUserKey = 'CognitoIdentityServiceProvider.3j6k22tm9ql3b2jr497qs5250e.LastAuthUser';
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />
+      },
+      {
+        path: "/log",
+        element: <Tracking />
       },
       {
         element: <NotFound />,
