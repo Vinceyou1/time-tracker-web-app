@@ -44,7 +44,8 @@ async function logTime(username){
       }
     // make API call with parameters and use promises to get response
     let response = await fetch("https://eeae2o3zd6.execute-api.us-east-2.amazonaws.com/default", requestOptions);
-    alert(response.json.body);
+    let data = await response.json()
+    alert(data.body.status);
     if(!response.ok){
         alert("Hmm, that didn't seem to work. Check if the time you are logging overlaps with another previously added.")
     }
