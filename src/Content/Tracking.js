@@ -16,22 +16,34 @@ async function logTime(username){
     var myHeaders = new Headers();
     // add content type header to object
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Access-Control-Allow-Origin", "*");
     // using built in JSON utility package turn object to string and store in a variable
     // create a JSON object with parameters for API call and store in a variable
+    // var requestOptions = {
+    //     method: 'POST',
+    //     headers: myHeaders,
+    //     body: {
+    //         username: username,
+    //         activity: activity,
+    //         start: start,
+    //         end: end
+    //     },
+    // };
+    var payload = JSON.stringify({
+        "httpMethod": "PUT", 
+        "username": "Vinceyou1",
+        "activity": "coding",
+        "start": "17",
+        "end": "21"
+    })
     var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: {
-            username: username,
-            activity: activity,
-            start: start,
-            end: end
+        method: 'PUT',
+        headers:{
+            "Content-Type": "application/json"
         },
-        mode: 'no-cors'
-    };
+        body: payload
+      }
     // make API call with parameters and use promises to get response
-    let response = await fetch("https://92m994vaeh.execute-api.us-east-2.amazonaws.com/default/TimeTracker", requestOptions);
+    let response = await fetch("https://eeae2o3zd6.execute-api.us-east-2.amazonaws.com/default", requestOptions);
     alert(response.json.body);
     if(!response.ok){
         alert("Hmm, that didn't seem to work. Check if the time you are logging overlaps with another previously added.")
