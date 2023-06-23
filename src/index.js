@@ -31,8 +31,9 @@ const router = createBrowserRouter([
         element: <Login />
       },
       {
-        path: "/log",
-        element: <Tracking />
+        path: "/tracking",
+        element: <Tracking />,
+        loader: user
       },
       {
         element: <NotFound />,

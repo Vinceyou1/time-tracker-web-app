@@ -22,7 +22,7 @@ function Header(){
                     <NavLink to="/showcase" className={({isActive}) => "nav-link" + (!isActive ? " unselected" : " selected")}>
                         <li>Showcase</li>
                     </NavLink>
-                    <NavLink to="/track" className={({isActive}) => "nav-link" + (!isActive ? " unselected" : " selected")}>
+                    <NavLink to="/tracking" className={({isActive}) => "nav-link" + (!isActive ? " unselected" : " selected")}>
                         <li>Tracking</li>
                     </NavLink>
                     <NavLink to="/log" className={({isActive}) => "nav-link" + (!isActive ? " unselected" : " selected")}>

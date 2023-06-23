@@ -1,9 +1,15 @@
 import './Tracking.css';
-import {useLoaderData} from 'react-router-dom'
+import { useLoaderData } from 'react-router-dom'
 import { Button, withAuthenticator } from '@aws-amplify/ui-react';
+import * as React from 'react';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
-async function logTime(username){
-    console.log('hello');
+let username = null;
+
+async function logTime(){
+    console.log(username);
     const activity = document.getElementById('Activity').value;
     const start = document.getElementById('Start').value;
     const end = document.getElementById('End').value;
@@ -19,25 +25,17 @@ async function logTime(username){
     // create a JSON object with parameters for API call and store in a variable
     var payload = JSON.stringify({
         "httpMethod": "PUT", 
-        "username": username,
-        "activity": activity,
-        "start": start,
-        "end": end
+        "username": String(username),
+        "activity": String(activity),
+        "start": String(start),
+        "end": String(end)
     });
     var requestOptions = {
         method: 'PUT',
         headers: myHeaders,
         body: payload
     };
-    
-    // var requestOptions = {
-    //     method: 'PUT',
-    //     headers:{
-    //         "Content-Type": "application/json"
-    //     },
-    //     body: payload
-    //   }
-    // make API call with parameters and use promises to get response
+
     let response = await fetch("https://eeae2o3zd6.execute-api.us-east-2.amazonaws.com/default", requestOptions);
     let data = await response.json()
     alert(data.body.status);
@@ -47,7 +45,11 @@ async function logTime(username){
 }
 
 function Tracking(){
-    const username = useLoaderData()
+    username = useLoaderData().toString();
+    const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
+    const handleChange = (newValue) => {
+        setValue(newValue);
+    };
     return (
         <div>
             <label>Activity :</label>
@@ -57,8 +59,16 @@ function Tracking(){
             <label>End :</label>
             <input type="text" id="End"></input>
             <Button
-                onClick={(username) => logTime(username)}
+                onClick={username => logTime(username)}
             ></Button>
+            <div style={{margin: "5% 40%"}}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DateTimePicker
+                    label="Uncontrolled picker"
+                    // defaultValue={new Date('2014-08-18T21:11:54')}
+                />
+            </LocalizationProvider>
+            </div>
         </div>
         
     )
