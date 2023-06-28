@@ -5,6 +5,7 @@ import * as React from 'react';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import Activity from './Activity';
 
 let username = null;
 
@@ -44,31 +45,43 @@ async function logTime(){
     }
 }
 
+const data = [
+    { activity: 'coding', start: '0', end: '1'},
+    { activity: 'coding', start: '5', end: '1'},
+    { activity: 'coding', start: '0', end: '1'},
+]
+
 function Tracking(){
     username = useLoaderData().toString();
-    const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
-    const handleChange = (newValue) => {
-        setValue(newValue);
-    };
+    const [startTime, setStartTime] = React.useState(new Date(0));
+    const logStartTime = () => {
+        console.log(startTime.getTime());
+    }
     return (
         <div>
-            <label>Activity :</label>
-            <input type="text" id="Activity"></input>
-            <label>Start :</label>
-            <input type="text" id="Start"></input>
-            <label>End :</label>
-            <input type="text" id="End"></input>
-            <Button
-                onClick={username => logTime(username)}
-            ></Button>
-            <div style={{margin: "5% 40%"}}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateTimePicker
-                    label="Uncontrolled picker"
-                    // defaultValue={new Date('2014-08-18T21:11:54')}
-                />
-            </LocalizationProvider>
+            <div className='Input'>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DateTimePicker
+                        label="Start Time"
+                        onChange={(time) => setStartTime(time)}
+                        sx={{
+                            display: 'block'
+                        }}
+                    />
+                    <DateTimePicker
+                        label="End Time"
+                        onChange={(time) => setStartTime(time)}
+                        sx={{
+                            marginTop: '10px',
+                            display: 'block'
+                        }}
+                    />
+                </LocalizationProvider>
+                
             </div>
+            {
+                data.map((activity) => <Activity name={activity.activity} start={activity.start} end={activity.end}/>)
+            }
         </div>
         
     )
