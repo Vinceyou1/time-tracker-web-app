@@ -1,20 +1,20 @@
 import './Tracking.css';
 import { useLoaderData } from 'react-router-dom'
-import { Button, withAuthenticator } from '@aws-amplify/ui-react';
+import { withAuthenticator } from '@aws-amplify/ui-react';
 import * as React from 'react';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import Activity from './Activity';
+import TextField from '@mui/material/TextField';
+import { Button } from '@mui/material';
+import Stack from '@mui/material/Stack';
 
 let username = null;
 
-async function logTime(){
-    console.log(username);
-    const activity = document.getElementById('Activity').value;
-    const start = document.getElementById('Start').value;
-    const end = document.getElementById('End').value;
-    if(activity == "" || start == "" || end == ""){
+async function logActivity(startTime, endTime, activity){
+    console.log(activity);
+    if(activity == "" || startTime.getTime() === 0 || endTime.getTime() === 0){
         alert("You must fill in all text boxes.");
         return;
     }
@@ -27,9 +27,9 @@ async function logTime(){
     var payload = JSON.stringify({
         "httpMethod": "PUT", 
         "username": String(username),
-        "activity": String(activity),
-        "start": String(start),
-        "end": String(end)
+        "activity": activity,
+        "start": String(startTime.getTime()),
+        "end": String(endTime.getTime())
     });
     var requestOptions = {
         method: 'PUT',
@@ -53,32 +53,25 @@ const data = [
 
 function Tracking(){
     username = useLoaderData().toString();
+    const [activity, setActivity] = React.useState("");
     const [startTime, setStartTime] = React.useState(new Date(0));
-    const logStartTime = () => {
-        console.log(startTime.getTime());
-    }
+    const [endTime, setEndTime] = React.useState(new Date(0));
     return (
         <div>
-            <div className='Input'>
+            <Stack className='Input' direction="row" spacing="1vw">
+                <TextField id="outlined-basic" label="Activity" variant="outlined" onChange={(event) => setActivity(event.target.value)}/>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DateTimePicker
                         label="Start Time"
-                        onChange={(time) => setStartTime(time)}
-                        sx={{
-                            display: 'block'
-                        }}
+                        onChange={(time) => setStartTime(new Date(time))}
                     />
                     <DateTimePicker
                         label="End Time"
-                        onChange={(time) => setStartTime(time)}
-                        sx={{
-                            marginTop: '10px',
-                            display: 'block'
-                        }}
+                        onChange={(time) => setEndTime(new Date(time))}
                     />
                 </LocalizationProvider>
-                
-            </div>
+                <Button variant="contained" onClick={() => logActivity(startTime, endTime, activity)}>Log</Button>
+            </Stack>
             {
                 data.map((activity) => <Activity name={activity.activity} start={activity.start} end={activity.end}/>)
             }
