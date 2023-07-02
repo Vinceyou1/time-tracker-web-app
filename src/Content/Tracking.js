@@ -13,7 +13,7 @@ import Stack from '@mui/material/Stack';
 let username = null;
 
 async function logActivity(startTime, endTime, activity){
-    if(activity == "" || startTime.getTime() === 0 || endTime.getTime() === 0){
+    if(activity === "" || startTime.getTime() === 0 || endTime.getTime() === 0){
         alert("You must fill in all text boxes.");
         return;
     }
@@ -66,9 +66,9 @@ async function getData(setData){
         data[i]['activity'] = items[i]['Activity']['S'];
         data[i]['start'] = items[i]['Start']['N'];
         data[i]['end'] = items[i]['End']['N'];
+        data[i]['index'] = parseInt(items[i]['Index']['N']);
     }
     setData(data);
-    console.log(data);
 }
 
 function Tracking(){
@@ -76,11 +76,15 @@ function Tracking(){
     const [activity, setActivity] = React.useState("");
     const [startTime, setStartTime] = React.useState(new Date(0));
     const [endTime, setEndTime] = React.useState(new Date(0));
-    const [data, setData] = React.useState([
-        { activity: 'coding', start: '0', end: '1'},
-        { activity: 'coding', start: '5', end: '1'},
-        { activity: 'coding', start: '0', end: '1'},
-    ]);
+    const [data, setData] = React.useState([]);
+    React.useEffect(() => {
+        const fetchData = async () => {
+            getData(setData);
+        }
+        // call the function
+        fetchData()
+        console.log("here")
+    }, [])
     return (
         <div>
             <Stack className='Input' direction="row" spacing="1vw">
@@ -99,7 +103,7 @@ function Tracking(){
                 <Button variant='contained' onClick={() => getData(setData)}></Button>
             </Stack>
             {
-                data.map((activity) => <Activity name={activity.activity} start={activity.start} end={activity.end}/>)
+                data.map((activity) => <Activity key={activity.index} name={activity.activity} start={activity.start} end={activity.end}/>)
             }
         </div>
         
