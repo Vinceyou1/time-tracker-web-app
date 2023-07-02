@@ -9,8 +9,13 @@ import Activity from './Activity';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import Stack from '@mui/material/Stack';
+import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 
 let username = null;
+function user(){
+    const lastAuthUserKey = 'CognitoIdentityServiceProvider.3j6k22tm9ql3b2jr497qs5250e.LastAuthUser';
+    return localStorage.getItem(lastAuthUserKey);
+}
 
 async function logActivity(startTime, endTime, activity, setData){
     if(activity === "" || startTime.getTime() === 0 || endTime.getTime() === 0){
@@ -46,7 +51,6 @@ async function logActivity(startTime, endTime, activity, setData){
 }
 
 async function getData(setData){
-    console.log("here 2");
     // instantiate a headers object
     var myHeaders = new Headers();
     // add content type header to object
@@ -74,7 +78,11 @@ async function getData(setData){
 }
 
 function Tracking(){
-    username = useLoaderData().toString();
+    let userdata = useLoaderData();
+    if(userdata == null) {
+        username = user();
+    }
+    else username = userdata.toString();
     const [activity, setActivity] = React.useState("");
     const [startTime, setStartTime] = React.useState(new Date(0));
     const [endTime, setEndTime] = React.useState(new Date(0));
@@ -85,11 +93,10 @@ function Tracking(){
         }
         // call the function
         fetchData()
-        console.log("here")
     }, [])
     return (
         <div>
-            <Stack className='Input' direction="row" spacing="1vw">
+            <Stack className='Input' direction="row" spacing="1vw" marginBottom="2vh">
                 <TextField id="outlined-basic" label="Activity" variant="outlined" onChange={(event) => setActivity(event.target.value)}/>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DateTimePicker
@@ -103,9 +110,12 @@ function Tracking(){
                 </LocalizationProvider>
                 <Button variant="contained" onClick={() => logActivity(startTime, endTime, activity, setData)}>Log</Button>
             </Stack>
-            {
-                data.map((activity) => <Activity key={activity.index} name={activity.activity} start={activity.start} end={activity.end}/>)
-            }
+            <Grid container spacing={2} sx={{
+                marginLeft:"0.5vw",
+                marginRight:"0.5vw",
+            }}>
+                {data.map((activity) => <Grid xs={3}><Activity key={activity.index} index={activity.index} name={activity.activity} start={activity.start} end={activity.end} getData={getData} setData={setData}/></Grid>)}
+            </Grid>
         </div>
         
     )
