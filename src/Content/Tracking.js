@@ -12,7 +12,7 @@ import Stack from '@mui/material/Stack';
 
 let username = null;
 
-async function logActivity(startTime, endTime, activity){
+async function logActivity(startTime, endTime, activity, setData){
     if(activity === "" || startTime.getTime() === 0 || endTime.getTime() === 0){
         alert("You must fill in all text boxes.");
         return;
@@ -37,14 +37,16 @@ async function logActivity(startTime, endTime, activity){
     };
 
     let response = await fetch("https://eeae2o3zd6.execute-api.us-east-2.amazonaws.com/default", requestOptions);
-    let data = await response.json()
-    alert(data.body.status);
-    if(!response.ok){
+    let data = await response.json();
+    if(data.statusCode === "200"){
+        getData(setData);
+    } else {
         alert("Hmm, that didn't seem to work. Check if the time you are logging overlaps with another previously added.")
     }
 }
 
 async function getData(setData){
+    console.log("here 2");
     // instantiate a headers object
     var myHeaders = new Headers();
     // add content type header to object
@@ -99,8 +101,7 @@ function Tracking(){
                         onChange={(time) => setEndTime(new Date(time))}
                     />
                 </LocalizationProvider>
-                <Button variant="contained" onClick={() => logActivity(startTime, endTime, activity)}>Log</Button>
-                <Button variant='contained' onClick={() => getData(setData)}></Button>
+                <Button variant="contained" onClick={() => logActivity(startTime, endTime, activity, setData)}>Log</Button>
             </Stack>
             {
                 data.map((activity) => <Activity key={activity.index} name={activity.activity} start={activity.start} end={activity.end}/>)
