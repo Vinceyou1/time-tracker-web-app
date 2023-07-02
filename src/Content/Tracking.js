@@ -60,6 +60,15 @@ async function getData(setData){
     let response = await fetch("https://eeae2o3zd6.execute-api.us-east-2.amazonaws.com/default?httpMethod=GET&username="+String(username), requestOptions);
     let json = await response.json();
     let items = json.body.data;
+    let data = new Array(items.length);
+    for(let i = 0; i < items.length; i++){
+        data[i] = {};
+        data[i]['activity'] = items[i]['Activity']['S'];
+        data[i]['start'] = items[i]['Start']['N'];
+        data[i]['end'] = items[i]['End']['N'];
+    }
+    setData(data);
+    console.log(data);
 }
 
 function Tracking(){
@@ -87,7 +96,7 @@ function Tracking(){
                     />
                 </LocalizationProvider>
                 <Button variant="contained" onClick={() => logActivity(startTime, endTime, activity)}>Log</Button>
-                <Button variant='contained' onClick={() => getData()}></Button>
+                <Button variant='contained' onClick={() => getData(setData)}></Button>
             </Stack>
             {
                 data.map((activity) => <Activity name={activity.activity} start={activity.start} end={activity.end}/>)
