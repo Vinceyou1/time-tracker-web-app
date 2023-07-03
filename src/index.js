@@ -11,6 +11,7 @@ import {
 import Header from './Content/Header';
 import NotFound from './Content/NotFound';
 import Tracking from './Content/Tracking';
+import Log from './Content/Log';
 
 function user(){
   const lastAuthUserKey = 'CognitoIdentityServiceProvider.3j6k22tm9ql3b2jr497qs5250e.LastAuthUser';
@@ -33,6 +34,16 @@ const router = createBrowserRouter([
       {
         path: "/tracking",
         element: <Tracking />,
+        loader: user
+      },
+      {
+        path: "/showcase",
+        element: <Log />,
+        loader: () => {return "Vinceyou1";}
+      },
+      {
+        path: "/log",
+        element: <Log />,
         loader: user
       },
       {

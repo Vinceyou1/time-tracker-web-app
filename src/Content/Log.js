@@ -38,10 +38,10 @@ async function getChartData(setData){
     }
     let chartData = [];
     for(var key in data){
-        chartData.push({y: data[key] / total_time, label: key});
+        chartData.push({y: Math.round(100*(data[key] / total_time)), label: key});
     }
     console.log(data)
-    setData(data);
+    setData(chartData);
 }
 
 function Showcase(){
@@ -60,16 +60,17 @@ function Showcase(){
         fetchData()
     }, [])
     const options = {
-        exportEnabled: true,
+        backgroundColor: "rgba(0,0,0,0)",
+        fontColor: "white",
         animationEnabled: true,
         title: {
-            text: "Website Traffic Sources"
+            text: ""
         },
         data: [{
+            indexLabelFontColor: "white",
             type: "pie",
             startAngle: 75,
             toolTipContent: "<b>{label}</b>: {y}%",
-            showInLegend: "true",
             legendText: "{label}",
             indexLabelFontSize: 16,
             indexLabel: "{label} - {y}%",
