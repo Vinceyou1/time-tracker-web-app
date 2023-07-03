@@ -27,8 +27,7 @@ async function deleteItem(index, getData, setData){
         body: payload
     };
 
-    let response = await fetch("https://eeae2o3zd6.execute-api.us-east-2.amazonaws.com/default", requestOptions);
-    let json = await response.json();
+    await fetch("https://eeae2o3zd6.execute-api.us-east-2.amazonaws.com/default", requestOptions);
     getData(setData);
 }
 
@@ -40,7 +39,8 @@ function formatDate(date){
     let ampm = hh >= 12 ? 'pm' : 'am';
     let minutes = date.getMinutes();
     
-    if(hh == 0) hh = 12;
+    if(hh === 0) hh = 12;
+    if(hh > 12) hh -= 12;
     if(minutes < 10) minutes = '0' + minutes;
     if (dd < 10) dd = '0' + dd;
     if (mm < 10) mm = '0' + mm;
