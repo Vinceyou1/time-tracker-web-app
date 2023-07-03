@@ -32,17 +32,47 @@ async function deleteItem(index, getData, setData){
     getData(setData);
 }
 
+function formatDate(date){
+    const yyyy = date.getFullYear();
+    let mm = date.getMonth() + 1; // Months start at 0!
+    let dd = date.getDate();
+    let hh = date.getHours();
+    let ampm = hh >= 12 ? 'pm' : 'am';
+    let minutes = date.getMinutes();
+    
+    if(hh == 0) hh = 12;
+    if(minutes < 10) minutes = '0' + minutes;
+    if (dd < 10) dd = '0' + dd;
+    if (mm < 10) mm = '0' + mm;
+
+    const formattedDate = dd + '/' + mm + '/' + yyyy + " " + hh + ":" + minutes + " " + ampm;
+    return formattedDate
+}
+
 function Activity({index, name, start, end, getData, setData}){
     let startTime = new Date(parseInt(start));
     let endTime = new Date(parseInt(end));
     console.log(startTime);
+    
     return(
         <div className="Activity">
-            <p>{name}</p>
-            <p>{startTime.toString()}</p>
-            <p>{endTime.toDateString()}</p>
-            <p>{index}</p>
-            <Button variant="contained" onClick={() => deleteItem(index, getData, setData)}></Button>
+            <div className="Info">
+                {name} <br/>
+                Start: {formatDate(startTime)} <br/>
+                End: {formatDate(endTime)}
+            </div>
+            <div className="Delete">
+                <Button sx={{
+                    backgroundColor: "lightblue",
+                    color: "black",
+                    height: 50,
+                    ":hover": {
+                        backgroundColor: "red",
+                        color: "white"
+                    }
+                }} variant="contained" onClick={() => deleteItem(index, getData, setData)}>DELETE</Button>
+            </div>
+            
         </div>
     )
 }

@@ -4,4 +4,16 @@
     color: black;
     padding: 10px;
     border-radius: 5px;
+    width: 100%;
+    height: fit-content;
+}
+.Info{
+    width: 70%;
+    display:inline-block;
+    margin: 0;
+}
+.Delete{
+    transform: translate(10%, 20%);
+    float: right;
+    width: 30%;
 }

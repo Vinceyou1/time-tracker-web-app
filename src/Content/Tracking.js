@@ -91,7 +91,6 @@ function Tracking(){
         const fetchData = async () => {
             getData(setData);
         }
-        // call the function
         fetchData()
     }, [])
     return (
@@ -114,7 +113,8 @@ function Tracking(){
                 marginLeft:"0.5vw",
                 marginRight:"0.5vw",
             }}>
-                {data.map((activity) => <Grid xs={3}><Activity key={activity.index} index={activity.index} name={activity.activity} start={activity.start} end={activity.end} getData={getData} setData={setData}/></Grid>)}
+            {data.map((activity) => <Grid xs={3}><Activity key={activity.index} index={activity.index} name={activity.activity} start={activity.start} end={activity.end} getData={getData} setData={setData}/></Grid>)}
+                
             </Grid>
         </div>
         
