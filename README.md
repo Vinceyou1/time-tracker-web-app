@@ -1,4 +1,4 @@
-#
+# Time Tracker
 This is my first website built with React.
 This web app is built to track daily activities.
 
