@@ -1,7 +1,6 @@
 import React from 'react';
 import CanvasJSReact from '@canvasjs/react-charts';
 import { useLoaderData } from 'react-router-dom';
-import { withAuthenticator } from '@aws-amplify/ui-react';
 //var CanvasJSReact = require('@canvasjs/react-charts');
 
 let username = null;
@@ -87,4 +86,4 @@ function Showcase(){
     );
 }
 
-export default withAuthenticator(Showcase)
+export default Showcase
